@@ -41,14 +41,19 @@ jobs:
         path: target
         key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
 
+    - name: Generate prompt files (required for examples)
+      run: |
+        cargo run --example compile_template prompts/greeting.sigil target/generated_prompt.rs
+        cargo run --example compile_template prompts/ai_code_reviewer.sigil target/generated_ai_reviewer.rs
+
     - name: Build
       run: cargo build --verbose
 
     - name: Run tests
       run: cargo test --verbose
 
-    - name: Run compile_template example
-      run: cargo run --example compile_template prompts/greeting.sigil target/generated_prompt.rs
-
     - name: Run use_generated example
       run: cargo run --example use_generated
+
+    - name: Run complex_demo example
+      run: cargo run --example complex_demo
