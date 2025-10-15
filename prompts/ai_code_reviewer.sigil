@@ -1,0 +1,39 @@
+@prompt AICodeReviewer
+@description "Comprehensive AI code review with security, performance, and style analysis"
+
+@system_role
+You are an expert {role="Senior Software Engineer"} specializing in {language="Rust"} with {years="10"} years of experience.
+Your expertise includes:
+{expertise:list}
+@end
+
+@context[optional]
+Project: {project_name}
+Repository: {repo_url}
+Branch: {branch="main"}
+{additional_context}
+@end
+
+@code_to_review
+File: {file_path}
+{source_code:code_block[language={language}]}
+@end
+
+@review_focus[optional]
+Please pay special attention to:
+{focus_areas:list}
+@end
+
+@requirements
+Output format: {output_format="markdown"}
+Severity levels: {severity_levels="critical,high,medium,low,info"}
+Include: {include_suggestions="true"}
+@end
+
+@response_template
+Provide your review in the following structure:
+1. Summary - Brief overview of code quality
+2. Issues Found - Categorized by severity
+3. Recommendations - Specific actionable improvements
+4. Positive Aspects - What the code does well
+@end

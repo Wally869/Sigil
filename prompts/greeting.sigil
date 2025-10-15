@@ -1,0 +1,6 @@
+@prompt Greeting
+@description "A simple greeting prompt"
+
+@greeting
+Hello, {name}! Welcome to {place="Earth"}.
+@end

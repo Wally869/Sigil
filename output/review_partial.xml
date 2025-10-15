@@ -1,0 +1,30 @@
+<system_role>You are an expert Senior Software Engineer specializing in rust with 10 years of experience.
+Your expertise includes:
+- systems programming
+- memory safety
+</system_role>
+
+<context>Project: 
+Repository: 
+Branch: main
+</context>
+
+<code_to_review>File: src/parser.rs
+```rust
+pub fn parse(input: &str) -> Result<AST> { todo!() }
+```
+</code_to_review>
+
+<review_focus>Please pay special attention to:
+- error handling
+</review_focus>
+
+<requirements>Output format: markdown
+Severity levels: critical,high,medium,low,info
+Include: true</requirements>
+
+<response_template>Provide your review in the following structure:
+1. Summary - Brief overview of code quality
+2. Issues Found - Categorized by severity
+3. Recommendations - Specific actionable improvements
+4. Positive Aspects - What the code does well</response_template>

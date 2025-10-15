@@ -1,0 +1,23 @@
+@prompt CodeReview
+@description "Reviews code for quality and security"
+
+@system
+You are an expert code reviewer specializing in {language="rust"}.
+@end
+
+@context[optional]
+Project: {project_info}
+@end
+
+@code
+{source_code:code_block[language={language}]}
+@end
+
+@focus_areas[optional]
+Pay attention to:
+{areas:list}
+@end
+
+@output
+Provide analysis in {format="markdown"} format.
+@end

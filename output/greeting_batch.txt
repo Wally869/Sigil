@@ -1,0 +1,12 @@
+Batch Rendering Examples
+========================
+
+Charlie:
+GREETING:
+Hello, Charlie! Welcome to Mars.
+Diana:
+GREETING:
+Hello, Diana! Welcome to Venus.
+Eve:
+GREETING:
+Hello, Eve! Welcome to Jupiter.

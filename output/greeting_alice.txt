@@ -1,0 +1,2 @@
+GREETING:
+Hello, Alice! Welcome to Wonderland.
