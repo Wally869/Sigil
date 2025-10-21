@@ -54,6 +54,12 @@ Run the demo examples:
 # Simple code generation demo
 cargo run --example demo
 
+# Compile a single .sigil file to Rust
+cargo run --example compile_template prompts/greeting.sigil target/greeting.rs
+
+# Compile entire directory of .sigil files (generates mod.rs too!)
+cargo run --example compile_template prompts/ src/generated/
+
 # End-to-end workflow: compile and use generated code
 cargo run --example use_generated
 
@@ -139,6 +145,65 @@ sigil/
 ├── output/               # Generated output samples
 ├── docs/SPECS.md         # Full language specification
 └── run_demo.sh/bat       # Quick demo scripts
+```
+
+## Build-Time Integration
+
+Add Sigil as a build dependency and use it in your `build.rs`:
+
+```rust
+// build.rs
+fn main() {
+    println!("cargo:rerun-if-changed=prompts/");
+
+    // Compile all .sigil files in prompts/ to src/generated/
+    // This also generates a mod.rs file that exports everything
+    sigil::compile_sigil_directory("prompts", "src/generated")
+        .expect("Failed to compile .sigil files");
+}
+```
+
+Then in your `Cargo.toml`, add:
+
+```toml
+[dependencies]
+sigil = "0.1"  # Use the published version or path
+
+[build-dependencies]
+sigil = "0.1"  # Needed for build.rs
+```
+
+In your code, use the generated module:
+
+```rust
+// src/main.rs
+mod generated;
+use generated::*;
+
+fn main() {
+    // All your prompt structs are now available
+    let greeting = Greeting::builder()
+        .name("Alice")
+        .build()
+        .unwrap();
+
+    let review = AICodeReviewer::builder()
+        .add_expertise("Rust")
+        .file_path("main.rs")
+        .source_code("fn main() {}")
+        .build()
+        .unwrap();
+
+    println!("{}", greeting.render_xml());
+    println!("{}", review.render_markdown());
+}
+```
+
+## Test Results
+
+```
+cargo test
+   ✓ 72 passed; 0 failed
 ```
 
 ## Documentation
